@@ -1,0 +1,201 @@
+/* Reset di base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+/* Header con Banner più alto per foto verticali */
+.profile-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 25px;
+}
+
+.banner {
+  height: 300px; /* Aumentato per mostrare bene la foto della tesi */
+  background: url('imgs/sfondo-banner.jpg') center 25% / cover no-repeat;
+  background-color: #0d47a1;
+}
+
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Foto profilata a cavallo del banner a sinistra */
+.avatar-container {
+  margin-top: -80px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  object-fit: cover;
+  background-color: #e5e7eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: block;
+}
+
+/* Testo posizionato Interamente nella fascia BIANCA (massima leggibilità) */
+.profile-info {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.name {
+  font-size: 2.2rem;
+  color: #0d47a1;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.tagline {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1976d2;
+  margin-top: 4px;
+}
+
+.sub-tagline {
+  font-size: 1.05rem;
+  color: #4b5563;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Layout Schede */
+.content-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.card h2 {
+  color: #0d47a1;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e8f0fe;
+  padding-bottom: 8px;
+}
+
+/* Lista Servizi */
+.services-list {
+  list-style: none;
+}
+
+.services-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+}
+
+.services-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #1976d2;
+  font-weight: bold;
+}
+
+/* Form di Contatto */
+.contact-form {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #374151;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+}
+
+/* Pulsanti */
+.btn-primary {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background-color: #0d47a1;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.btn-primary:hover {
+  background-color: #1565c0;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+/* Adattamento Mobile */
+@media (max-width: 600px) {
+  .banner {
+    height: 220px;
+  }
+  .avatar-container {
+    justify-content: center;
+  }
+  .profile-info {
+    text-align: center;
+  }
+}

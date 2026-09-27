@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carlo Maria Piccolo | Ripetizioni di Matematica e Fisica</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header con Banner più alto e Profilo ben visibile -->
+  <header class="profile-header">
+    <div class="banner"></div>
+    <div class="profile-container">
+      <div class="avatar-container">
+        <img src="imgs/foto-profilo.jpg" alt="Carlo Maria Piccolo" class="avatar">
+      </div>
+      <div class="profile-info">
+        <h1 class="name">Carlo Maria Piccolo</h1>
+        <p class="tagline">Ripetizioni di Matematica e Fisica</p>
+        <p class="sub-tagline">Laureato in Matematica | Studente Magistrale in Ingegneria Matematica</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-container">
+
+    <!-- Sezione Chi Sono -->
+    <section class="card" id="chi-sono">
+      <h2>Chi Sono</h2>
+      <p>
+        Ciao! Sono Carlo Maria, laureato in Matematica e attualmente iscritto alla laurea magistrale in Ingegneria Matematica al Politecnico di Torino. 
+        Da diversi anni mi dedico con passione all'insegnamento privato, aiutando studenti delle scuole superiori e universitari a superare le difficoltà in Matematica e Fisica, recuperare debiti formativi o prepararsi al meglio per verifiche ed esami.
+      </p>
+    </section>
+
+    <!-- Sezione Cosa Offro -->
+    <section class="card" id="cosa-offro">
+      <h2>Cosa Offro</h2>
+      <ul class="services-list">
+        <li>
+          <strong>Lezioni Personalizzate:</strong> Spiegazioni chiare e adatte al metodo di studio di ciascun studente.
+        </li>
+        <li>
+          <strong>Preparazione Verifiche ed Esami:</strong> Esercitazioni mirate su compiti in classe, recupero debiti e preparazione alla Maturità o esami universitari base.
+        </li>
+        <li>
+          <strong>Flessibilità di Modalità:</strong> Lezioni in presenza (a Torino) oppure online tramite tavoletta grafica.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Sezione Come Contattarmi -->
+    <section class="card" id="contatti">
+      <h2>Come Contattarmi</h2>
+      <p>Compila il modulo sottostante per richiedere informazioni o fissare un primo colloquio conoscitivo.</p>
+
+      <!-- Form compatibile con Netlify Forms -->
+      <form name="contatti-ripetizioni" method="POST" data-netlify="true" class="contact-form">
+        
+        <div class="form-group">
+          <label for="nome">Nome e Cognome *</label>
+          <input type="text" id="nome" name="nome" required placeholder="Es. Mario Rossi">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required placeholder="nome@esempio.com">
+        </div>
+
+        <div class="form-group">
+          <label for="materia">Materia / Classe *</label>
+          <input type="text" id="materia" name="materia" required placeholder="Es. Matematica - 3° Liceo Scientifico">
+        </div>
+
+        <div class="form-group">
+          <label for="messaggio">Messaggio *</label>
+          <textarea id="messaggio" name="messaggio" rows="4" required placeholder="Scrivi qui i dettagli della tua richiesta..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Invia Messaggio</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Carlo Maria Piccolo — Ripetizioni di Matematica e Fisica</p>
+  </footer>
+
+</body>
+</html>

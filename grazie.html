@@ -11,7 +11,11 @@
   <link rel="stylesheet" href="style.css">
   
   <style>
-    /* Stpecifici per centrare e strutturare la pagina di ringraziamento */
+    /* Forza la barra di scorrimento verticale per evitare saltelli di layout */
+    html {
+      overflow-y: scroll;
+    }
+
     body {
       display: flex;
       flex-direction: column;
@@ -91,9 +95,8 @@
     </div>
   </main>
 
-  <!-- Footer con Logo e Copyright identico alla home -->
+  <!-- Footer identico alla home per ereditare le stesse regole CSS -->
   <footer>
-    <img src="imgs/logo_cerchio.png" alt="Carlo Maria Ripetizioni Logo" class="footer-logo">
     <p>&copy; 2026 Carlo Maria Piccolo — Ripetizioni di Matematica e Fisica</p>
   </footer>
 

@@ -151,6 +151,7 @@ body {
   font-size: 0.95rem;
   font-family: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: vertical; /* Impedisce l'allargamento orizzontale, permettendo solo di allungarlo verso il basso */
 }
 
 .form-group input:focus,

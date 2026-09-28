@@ -65,19 +65,14 @@
       line-height: 1.6;
     }
 
-    .btn-home {
+    /* Riutilizza la classe del bottone principale per ereditare colore e stile esatti */
+    .btn-primary {
       display: inline-block;
       padding: 12px 28px;
-      background-color: #2c3e50;
-      color: white;
       text-decoration: none;
       border-radius: 6px;
       font-weight: 500;
-      transition: background-color 0.2s;
-    }
-
-    .btn-home:hover {
-      background-color: #1a252f;
+      text-align: center;
     }
   </style>
 </head>
@@ -91,7 +86,8 @@
       <h1>Messaggio Inviato!</h1>
       <p>Grazie per aver inviato un messaggio, verrai ricontattato sull'indirizzo email fornito non appena possibile.</p>
       
-      <a href="index.html" class="btn-home">Torna alla Home</a>
+      <!-- Sfrutta la classe btn-primary definita nel tuo style.css -->
+      <a href="index.html" class="btn-primary">Torna alla Home</a>
     </div>
   </main>
 

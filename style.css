@@ -204,6 +204,7 @@ footer {
 @media (max-width: 600px) {
   .banner {
     height: 180px;
+    background: url('imgs/sfondo-banner_mobile.jpg') center center / cover no-repeat;
   }
 
   .avatar-container {

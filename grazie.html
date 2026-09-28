@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messaggio Inviato | Carlo Maria Piccolo</title>
+  
+  <!-- Favicon per la scheda del browser -->
+  <link rel="icon" type="image/png" href="imgs/logo.png">
+
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Stpecifici per centrare e strutturare la pagina di ringraziamento */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f4f6f9;
+      justify-content: space-between;
+    }
+
+    .thank-you-main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .thank-you-card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .thank-you-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .thank-you-card h1 {
+      color: #2c3e50;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .thank-you-card p {
+      color: #555;
+      font-size: 1.05rem;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .btn-home {
+      display: inline-block;
+      padding: 12px 28px;
+      background-color: #2c3e50;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+
+    .btn-home:hover {
+      background-color: #1a252f;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="thank-you-main">
+    <div class="thank-you-card">
+      <!-- Logo circolare -->
+      <img src="imgs/logo_cerchio.png" alt="Carlo Maria Ripetizioni Logo" class="thank-you-logo">
+      
+      <h1>Messaggio Inviato!</h1>
+      <p>Grazie per aver inviato un messaggio, verrai ricontattato sull'indirizzo email fornito non appena possibile.</p>
+      
+      <a href="index.html" class="btn-home">Torna alla Home</a>
+    </div>
+  </main>
+
+  <!-- Footer con Logo e Copyright identico alla home -->
+  <footer>
+    <img src="imgs/logo_cerchio.png" alt="Carlo Maria Ripetizioni Logo" class="footer-logo">
+    <p>&copy; 2026 Carlo Maria Piccolo — Ripetizioni di Matematica e Fisica</p>
+  </footer>
+
+</body>
+</html>

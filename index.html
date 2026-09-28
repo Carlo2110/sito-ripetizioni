@@ -74,9 +74,21 @@
       <h2>Come Contattarmi</h2>
       <p>Compila il modulo sottostante per richiedere informazioni o fissare un primo colloquio conoscitivo.</p>
 
-      <!-- Form compatibile con Netlify Forms -->
-      <form name="contatti-ripetizioni" method="POST" data-netlify="true" class="contact-form">
+      <!-- Form gestito tramite FormSubmit -->
+      <form action="https://formsubmit.co/carlomariaripetizioni@gmail.com" method="POST" class="contact-form">
         
+        <!-- Campo Honeypot per Anti-Bot (nascosto) -->
+        <input type="text" name="_honey" style="display:none">
+
+        <!-- Disabilita il Captcha visivo per velocizzare l'invio -->
+        <input type="hidden" name="_captcha" value="false">
+
+        <!-- Oggetto dinamico gestito via JS -->
+        <input type="hidden" id="form-subject" name="_subject" value="[SITO RIPETIZIONI]">
+
+        <!-- Reindirizzamento ringraziamento -->
+        <input type="hidden" name="_next" value="https://Carlo2110.github.io/sito-ripetizioni/grazie.html">
+
         <div class="form-group">
           <label for="nome">Nome e Cognome *</label>
           <input type="text" id="nome" name="nome" required placeholder="Es. Mario Rossi">
@@ -108,6 +120,25 @@
     <img src="imgs/logo_cerchio.png" alt="Carlo Maria Ripetizioni Logo" class="footer-logo">
     <p>&copy; 2026 Carlo Maria Piccolo — Ripetizioni di Matematica e Fisica</p>
   </footer>
+
+  <!-- Script per personalizzare l'oggetto dell'email con Nome ed Email del mittente -->
+  <script>
+    const contactForm = document.querySelector('.contact-form');
+    const subjectInput = document.getElementById('form-subject');
+    const nomeInput = document.getElementById('nome');
+    const emailInput = document.getElementById('email');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', function () {
+        const nomeVal = nomeInput.value ? nomeInput.value.trim() : '';
+        const emailVal = emailInput.value ? emailInput.value.trim() : '';
+        
+        if (nomeVal && emailVal) {
+          subjectInput.value = `[SITO RIPETIZIONI] ${nomeVal} (${emailVal})`;
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>

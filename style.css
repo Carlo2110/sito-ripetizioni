@@ -150,6 +150,7 @@ body {
   border-radius: 6px;
   font-size: 0.95rem;
   font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input:focus,
@@ -179,23 +180,69 @@ body {
   background-color: #1565c0;
 }
 
-/* Footer */
+/* Footer con Logo */
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 30px 20px;
   color: #9ca3af;
   font-size: 0.85rem;
 }
 
-/* Adattamento Mobile */
+.footer-logo {
+  width: 55px;
+  height: auto;
+  margin-bottom: 10px;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.footer-logo:hover {
+  opacity: 1;
+}
+
+/* Adattamento Mobile (Ottimizzazione Smartphone) */
 @media (max-width: 600px) {
   .banner {
-    height: 220px;
+    height: 180px;
   }
+
   .avatar-container {
     justify-content: center;
+    margin-top: -60px;
   }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+
   .profile-info {
     text-align: center;
+  }
+
+  .name {
+    font-size: 1.7rem;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+  }
+
+  .sub-tagline {
+    font-size: 0.95rem;
+  }
+
+  .content-container {
+    margin: 20px auto;
+    padding: 0 12px;
+    gap: 15px;
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+
+  .btn-primary {
+    width: 100%; /* Pulsante a tutta larghezza su mobile */
   }
 }

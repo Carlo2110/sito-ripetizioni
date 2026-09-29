@@ -104,25 +104,25 @@
       </ul>
     </section>
 
-    <!-- Sezione Come Contattarmi -->
+<!-- Sezione Come Contattarmi -->
     <section class="card" id="contatti">
       <h2>Come Contattarmi</h2>
       <p>Compila il modulo sottostante per richiedere informazioni, ricevere maggiori dettagli sulle lezioni o fissare un primo colloquio conoscitivo. Sarò felice di rispondere alle tue domande nel più breve tempo possibile.</p>
 
-      <!-- Form gestito tramite FormSubmit -->
-      <form action="https://formsubmit.co/carlomariaripetizioni@gmail.com" method="POST" class="contact-form">
+      <!-- Form gestito tramite Web3Forms -->
+      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
         
+        <!-- Access Key di Web3Forms -->
+        <input type="hidden" name="access_key" value="9b781721-4f61-4565-b467-c1efe5cc5cca">
+
         <!-- Campo Honeypot per Anti-Bot (nascosto) -->
-        <input type="text" name="_honey" style="display:none">
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-        <!-- Disabilita il Captcha visivo per velocizzare l'invio -->
-        <input type="hidden" name="_captcha" value="false">
-
-        <!-- Oggetto dinamico gestito via JS -->
-        <input type="hidden" id="form-subject" name="_subject" value="[SITO RIPETIZIONI]">
+        <!-- Oggetto dinamico gestito via JS (Web3Forms usa 'subject') -->
+        <input type="hidden" id="form-subject" name="subject" value="[SITO RIPETIZIONI]">
 
         <!-- Reindirizzamento ringraziamento -->
-        <input type="hidden" name="_next" value="https://carlomariaripetizioni.it/grazie.html">
+        <input type="hidden" name="redirect" value="https://carlomariaripetizioni.it/grazie.html">
 
         <div class="form-group">
           <label for="nome">Nome e Cognome *</label>

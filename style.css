@@ -248,3 +248,11 @@ footer {
     width: 100%; /* Pulsante a tutta larghezza su mobile */
   }
 }
+
+/* Adattamento Tablet in verticale / Schermi intermedi */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .banner {
+    height: 220px;
+    background-position: center 30%;
+  }
+}

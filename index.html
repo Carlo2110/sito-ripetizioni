@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -16,6 +17,13 @@
   <meta property="og:image" content="https://carlomariaripetizioni.it/imgs/logo_cerchio_anteprima.png">
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- Cloudflare Turnstile -->
+  <script
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
 </head>
 <body>
 
@@ -104,25 +112,16 @@
       </ul>
     </section>
 
-<!-- Sezione Come Contattarmi -->
+    <!-- Sezione Come Contattarmi -->
     <section class="card" id="contatti">
       <h2>Come Contattarmi</h2>
       <p>Compila il modulo sottostante per richiedere informazioni, ricevere maggiori dettagli sulle lezioni o fissare un primo colloquio conoscitivo. Sarò felice di rispondere alle tue domande nel più breve tempo possibile.</p>
 
-      <!-- Form gestito tramite Web3Forms -->
-      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
-        
-        <!-- Access Key di Web3Forms -->
-        <input type="hidden" name="access_key" value="9b781721-4f61-4565-b467-c1efe5cc5cca">
+      <!-- Form gestito tramite Cloudflare Worker e Web3Forms -->
+      <form class="contact-form" id="contact-form">
 
         <!-- Campo Honeypot per Anti-Bot (nascosto) -->
         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-
-        <!-- Oggetto dinamico gestito via JS (Web3Forms usa 'subject') -->
-        <input type="hidden" id="form-subject" name="subject" value="[SITO RIPETIZIONI]">
-
-        <!-- Reindirizzamento ringraziamento -->
-        <input type="hidden" name="redirect" value="https://carlomariaripetizioni.it/grazie.html">
 
         <div class="form-group">
           <label for="nome">Nome e Cognome *</label>
@@ -144,6 +143,15 @@
           <textarea id="messaggio" name="messaggio" rows="4" required placeholder="Scrivi qui i dettagli della tua richiesta..."></textarea>
         </div>
 
+        <!-- Verifica antispam Cloudflare Turnstile -->
+        <div
+          class="cf-turnstile"
+          data-sitekey="0x4AAAAAAFXs3Nfhq8xGkO6W"
+          data-appearance="interaction-only"
+        ></div>
+
+        <p id="form-status" role="status" aria-live="polite"></p>
+
         <button type="submit" class="btn-primary">Invia Messaggio</button>
       </form>
     </section>
@@ -156,23 +164,148 @@
     <p>&copy; 2026 Carlo Maria Piccolo — Ripetizioni di Matematica e Fisica</p>
   </footer>
 
-  <!-- Script per personalizzare l'oggetto dell'email con Nome ed Email del mittente -->
+  <!-- Script per Web3Forms e autoresponder Cloudflare -->
   <script>
-    const contactForm = document.querySelector('.contact-form');
-    const subjectInput = document.getElementById('form-subject');
-    const nomeInput = document.getElementById('nome');
-    const emailInput = document.getElementById('email');
+    const contactForm = document.getElementById("contact-form");
+    const submitButton = contactForm.querySelector('[type="submit"]');
+    const formStatus = document.getElementById("form-status");
 
-    if (contactForm) {
-      contactForm.addEventListener('submit', function () {
-        const nomeVal = nomeInput.value ? nomeInput.value.trim() : '';
-        const emailVal = emailInput.value ? emailInput.value.trim() : '';
-        
-        if (nomeVal && emailVal) {
-          subjectInput.value = `[SITO RIPETIZIONI] ${nomeVal} (${emailVal})`;
+    const WEB3FORMS_URL = "https://api.web3forms.com/submit";
+
+    const WEB3FORMS_ACCESS_KEY =
+      "9b781721-4f61-4565-b467-c1efe5cc5cca";
+
+    const WORKER_URL =
+      "https://ripetizioni-autoresponder.carlomaria2001-5e1.workers.dev/";
+
+    const THANK_YOU_URL =
+      "https://carlomariaripetizioni.it/grazie.html";
+
+    contactForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      // Evita invii multipli durante l'elaborazione
+      if (submitButton.disabled) return;
+
+      const formData = new FormData(contactForm);
+
+      const nome = String(formData.get("nome") || "").trim();
+      const email = String(formData.get("email") || "").trim();
+      const materia = String(formData.get("materia") || "").trim();
+      const messaggio = String(formData.get("messaggio") || "").trim();
+
+      const botcheck = formData.get("botcheck") || "";
+      const token = formData.get("cf-turnstile-response");
+
+      // Controllo Honeypot
+      if (botcheck) {
+        formStatus.textContent =
+          "Non è stato possibile inviare il messaggio.";
+        return;
+      }
+
+      // Controllo Turnstile
+      if (!token) {
+        formStatus.textContent =
+          "Completa la verifica antispam prima di inviare.";
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Invio in corso...";
+      formStatus.textContent = "";
+
+      // Dati inviati direttamente a Web3Forms
+      const web3Payload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `[SITO RIPETIZIONI] ${nome} (${email})`,
+        nome: nome,
+        email: email,
+        materia: materia,
+        messaggio: messaggio
+      };
+
+      // FASE 1: Invio della richiesta a Web3Forms
+      try {
+        const response = await fetch(WEB3FORMS_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(web3Payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || result.success !== true) {
+          throw new Error("Web3Forms non ha accettato la richiesta.");
         }
-      });
-    }
+
+      } catch (error) {
+        console.error("Errore Web3Forms:", error);
+
+        formStatus.textContent =
+          "Non è stato possibile confermare l'invio. " +
+          "Controlla la tua email prima di riprovare.";
+
+        if (typeof turnstile !== "undefined") {
+          turnstile.reset();
+        }
+
+        submitButton.disabled = false;
+        submitButton.textContent = "Invia Messaggio";
+
+        return;
+      }
+
+      // FASE 2: Richiesta accettata da Web3Forms.
+      // Avviamo l'autoresponder tramite Cloudflare Worker.
+
+      const workerPayload = {
+        nome: nome,
+        email: email,
+        botcheck: botcheck,
+        turnstileToken: token
+      };
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
+
+      try {
+        const response = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(workerPayload),
+          signal: controller.signal
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.confirmationSent) {
+          console.warn(
+            "Richiesta ricevuta da Web3Forms, " +
+            "ma conferma automatica non inviata."
+          );
+        }
+
+      } catch (error) {
+        console.warn(
+          "Richiesta ricevuta da Web3Forms. " +
+          "Errore nell'autoresponder:",
+          error
+        );
+
+      } finally {
+        clearTimeout(timeout);
+
+        // La richiesta principale è stata accettata.
+        // Il reindirizzamento avviene anche se l'autoresponder fallisce.
+        window.location.href = THANK_YOU_URL;
+      }
+    });
   </script>
 
 </body>
